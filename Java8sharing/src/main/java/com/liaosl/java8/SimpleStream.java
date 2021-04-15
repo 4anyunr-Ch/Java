@@ -1,6 +1,5 @@
 package com.liaosl.java8;
 
-import java.security.spec.DSAGenParameterSpec;
 import java.util.*;
 
 import static java.util.stream.Collectors.toList;
@@ -18,12 +17,24 @@ public class SimpleStream {
                 new Dish("prawns",false,300,Dish.Type.FISH),
                 new Dish("salmon",false,450,Dish.Type.FISH)
         );
+//        Stream<Dish> stream = menu.stream();
+//        stream.forEach(System.out::println);
+
+        List<String> collect = menu.stream().filter(d -> {
+            System.out.println("filtering ->" + d.getName());
+            return d.getCalories() > 300;
+        }).map(d -> {
+            System.out.println("map->" + d.getName());
+            return d.getName();
+        }).limit(3).collect(toList());
+
+        System.out.println(collect);
 
 //        List<String> dishNamesByColletions = getDishNamesByColletions(menu);
 //        System.out.println(dishNamesByColletions);
 
-        List<String> dishNamesByStream = getDishNamesByStream(menu);
-        System.out.println(dishNamesByStream);
+//        List<String> dishNamesByStream = getDishNamesByStream(menu);
+//        System.out.println(dishNamesByStream);
 
     }
 
